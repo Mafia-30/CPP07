@@ -6,7 +6,7 @@
 /*   By: ymafaman <ymafaman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 01:32:36 by ymafaman          #+#    #+#             */
-/*   Updated: 2024/09/11 02:42:17 by ymafaman         ###   ########.fr       */
+/*   Updated: 2024/09/11 02:53:25 by ymafaman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ Array<T>& Array<T>::operator=( const Array& rhs )
 }
 
 template <typename T>
-T   Array<T>::operator[]( unsigned int index )
+T&   Array<T>::operator[]( unsigned int index )
 {
     if (this->arr_size != 0 && index < this->arr_size)
         return (this->array[index]);
