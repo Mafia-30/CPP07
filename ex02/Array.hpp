@@ -6,7 +6,7 @@
 /*   By: ymafaman <ymafaman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 01:21:59 by ymafaman          #+#    #+#             */
-/*   Updated: 2024/09/11 02:51:40 by ymafaman         ###   ########.fr       */
+/*   Updated: 2024/09/19 10:02:56 by ymafaman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ class Array
         ~Array();
 
         Array&  operator=( const Array& rhs );
-        T&      operator[]( unsigned int index );
+        T&   operator[]( unsigned int index );
         unsigned int  size( void );
 
     private:

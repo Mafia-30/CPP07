@@ -1,43 +1,54 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: ymafaman <ymafaman@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/11 02:05:19 by ymafaman          #+#    #+#             */
-/*   Updated: 2024/09/11 02:53:38 by ymafaman         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-#include "Array.hpp"
 #include <iostream>
+#include "Array.hpp"
 
-int main()
+#define MAX_VAL 750
+
+int main(int, char**)
 {
-    Array<int> IntArray(5);
-
-    for (unsigned int i = 0; i < IntArray.size(); i++)
+    Array<int> numbers(MAX_VAL);
+    int* mirror = new int[MAX_VAL];
+    srand(time(NULL));
+    for (int i = 0; i < MAX_VAL; i++)
     {
-        std::cout << IntArray[i] << std::endl;
+        const int value = rand();
+        numbers[i] = value;
+        mirror[i] = value;
+    }
+    //SCOPE
+    {
+        Array<int> tmp = numbers;
+        Array<int> test(tmp);
     }
 
+    for (int i = 0; i < MAX_VAL; i++)
+    {
+        if (mirror[i] != numbers[i])
+        {
+            std::cerr << "didn't save the same value!!" << std::endl;
+            return 1;
+        }
+    }
     try
     {
-        IntArray[0] = 99;
-        std::cout << IntArray[0] << std::endl;
+        numbers[-2] = 0;
+    }
+    catch(const std::exception& e)
+    {
+        std::cerr << e.what() << '\n';
+    }
+    try
+    {
+        numbers[MAX_VAL] = 0;
     }
     catch(const std::exception& e)
     {
         std::cerr << e.what() << '\n';
     }
 
-    try
+    for (int i = 0; i < MAX_VAL; i++)
     {
-        std::cout << IntArray[7] << std::endl;
+        numbers[i] = rand();
     }
-    catch(const std::exception& e)
-    {
-        std::cerr << e.what() << '\n';
-    }
+    delete [] mirror;//
+    return 0;
 }

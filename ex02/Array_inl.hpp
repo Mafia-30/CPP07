@@ -6,7 +6,7 @@
 /*   By: ymafaman <ymafaman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 01:32:36 by ymafaman          #+#    #+#             */
-/*   Updated: 2024/09/11 02:53:25 by ymafaman         ###   ########.fr       */
+/*   Updated: 2024/09/19 10:12:54 by ymafaman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,29 @@ Array<T>::Array( unsigned int arr_size )
 template <typename T>
 Array<T>::Array( const Array& ref )
 {
-    *this = ref;
+    this->arr_size = ref.arr_size;
+
+    try
+    {
+        this->array = new T[this->arr_size];
+    }
+    catch(const std::exception& e)
+    {
+        std::cerr << "Memory allocation for the array has failed!";
+        this->array = NULL;
+        this->arr_size = 0;
+    }
+
+    for (unsigned int i = 0; i < this->arr_size; i++)
+        this->array[i] = ref.array[i];
 }
 
 template <typename T>
 Array<T>::~Array()
 {
     delete [] this->array;
+
+    
 }
 
 template <typename T>
@@ -79,6 +95,9 @@ Array<T>& Array<T>::operator=( const Array& rhs )
         this->array = NULL;
         this->arr_size = 0;
     }
+
+    for (unsigned int i = 0; i < this->arr_size; i++)
+        this->array[i] = rhs.array[i];
 
     return (*this);
 }
